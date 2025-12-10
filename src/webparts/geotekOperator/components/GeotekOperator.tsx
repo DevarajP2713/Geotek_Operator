@@ -7,9 +7,10 @@ import {
 import { Layout } from "antd";
 import { HashRouter, Route, Routes } from "react-router-dom";
 import ErrorElement from "../../../shared/components/common/ErrorElement/ErrorElement";
-import { renderNestedRoutes } from "../../../shared/utils/RenderRoutes";
-import { routes } from "../../../routes/routes";
+// import { renderNestedRoutes } from "../../../shared/utils/RenderRoutes";
+// import { routes } from "../../../routes/routes";
 import Header from "../../../shared/components/common/Header/Header";
+import ShiftDetails from "../../../modules/Operator/pages/ShiftCalendar/ShiftDetails";
 
 const GeotekOperator: React.FC<{ context: any }> = ({ context }) => {
   return (
@@ -27,9 +28,9 @@ const GeotekOperator: React.FC<{ context: any }> = ({ context }) => {
       >
         <Suspense fallback={<div>Loading...</div>}>
           <Layout
-          style={{
-            background: "transparent",
-          }}
+            style={{
+              background: "transparent",
+            }}
           >
             <Header context={context} />
             <div
@@ -42,7 +43,8 @@ const GeotekOperator: React.FC<{ context: any }> = ({ context }) => {
               }}
             >
               <Routes>
-                {renderNestedRoutes(routes)}
+                {/* {renderNestedRoutes(routes)} */}
+                <Route path="/shift" element={<ShiftDetails />} />
 
                 <Route
                   path="*"

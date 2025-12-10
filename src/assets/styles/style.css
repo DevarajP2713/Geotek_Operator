@@ -1366,3 +1366,24 @@ button.actionBtnV2--danger .anticon {
     font-family: "robotoFlex", sans-serif !important;
     color: #adadad !important;
 }
+
+/* Full Calendar */
+.fc .fc-col-header-cell-cushion {
+    color: #fff !important;
+}
+
+.fc-theme-standard th {
+    background-color: #00235A !important;
+}
+
+.fc-theme-standard td {
+    background-color: #fff !important;
+}
+
+.fc .fc-daygrid-day-number {
+    color: #00235a !important;
+}
+
+.fc .fc-daygrid-day.fc-day-today {
+    background: linear-gradient(90deg, #00235A, #FF5E14) !important;
+}
