@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "geotek-operator-client-side-solution",
+    "id": "6a5b2d54-a97b-4adc-8dd5-92f27bfbf047",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.18.2"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "GeotekOperator description"
+      },
+      "longDescription": {
+        "default": "GeotekOperator description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "geotek-operator Feature",
+        "description": "The feature that activates elements of the geotek-operator solution.",
+        "id": "8a0c5750-d559-41e5-85f5-bfd43e8e26d2",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/geotek-operator.sppkg"
+  }
+}

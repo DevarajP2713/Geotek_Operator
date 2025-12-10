@@ -1,0 +1,52 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.customDatePicker {
+  width: 100%;
+  padding: 8px;
+  border-radius: 4px !important;
+  // border: 1px solid #eee !important;
+  border: 1px solid #6273a270 !important;
+  font-size: 13px !important;
+  transition: border 0.3s ease;
+  font-family: "robotoFlex", sans-serif;
+  .ant-picker-input {
+    input::placeholder {
+      font-size: 13px !important;
+    }
+  }
+}
+
+.customTextArea:hover,
+.customDatePicker:hover {
+  border-color: #1761fd;
+}
+
+.error {
+  border-color: #ff4d4f !important;
+}
+
+.errorMessage {
+  color: #ff4d4f;
+  font-size: 13px;
+  font-family: "robotoFlex", sans-serif;
+}
+
+@media (max-width: 769px) {
+  .customTextArea,
+  .customDatePicker {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .customTextArea,
+  .customDatePicker {
+    font-size: 12px;
+    padding: 6px;
+  }
+}

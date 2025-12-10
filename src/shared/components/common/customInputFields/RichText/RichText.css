@@ -1,0 +1,81 @@
+.customeRichText {
+  height: 100%;
+}
+
+.customeRichText .ql-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: #d9d9d940;
+  border: 2px solid #f6f6f6 !important;
+  height: 42px;
+  border: 0 !important;
+  font-family: "robotoFlex", sans-serif !important;
+}
+
+.customeRichText .ql-container {
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border: 2px solid #f6f6f6 !important;
+  font-family: "robotoFlex", sans-serif !important;
+  height: 160px;
+  overflow: auto;
+}
+
+strong {
+  font-family: "robotoFlex", sans-serif !important;
+}
+
+em {
+  font-style: italic !important;
+}
+
+.ql-container .ql-toolbar .ql-snow {
+  border: 2px solid #f6f6f6 !important;
+}
+
+.ql-snow .ql-editor img {
+  max-width: 400px;
+}
+
+.ql-editor img {
+  width: auto;
+  max-width: 400px;
+  height: auto !important;
+  max-height: 400px;
+  margin-right: 8px;
+  vertical-align: middle !important;
+}
+
+.ql-editor .fileAttachmentIcon {
+  width: 11px !important;
+  height: 15px !important;
+  margin-right: 8px;
+  vertical-align: middle !important;
+}
+
+.ql-editor a {
+  vertical-align: middle !important;
+  margin-right: 10px;
+}
+
+.ql-action {
+  display: none !important;
+}
+
+.ql-remove {
+  display: none !important;
+}
+
+@media (max-width: 600px) {
+  .ql-toolbar.ql-snow {
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .ql-toolbar.ql-snow .ql-formats {
+    display: flex;
+    align-items: center;
+  }
+}

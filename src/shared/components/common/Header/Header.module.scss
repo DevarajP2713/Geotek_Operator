@@ -1,0 +1,34 @@
+.headerCon {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 40px 0 40px;
+
+    .geoTekLogoBox {
+        img {
+            width: 130px;
+            height: 30px;
+        }
+    }
+
+    .geoTekOperatorLogoBox {
+        img {
+            width: 160px;
+            height: 40px;
+        }
+    }
+
+    .geoTekUserBox {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+
+        .userName {
+            margin: 0;
+            font-size: 14px;
+            color: #fff;
+        }
+    }
+}

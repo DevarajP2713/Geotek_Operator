@@ -1,0 +1,54 @@
+.wrapper {
+  margin-bottom: 16px;
+  width: 100%;
+  font-family: "robotoFlex", sans-serif;
+}
+
+.label {
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8px;
+  color: #1d1d1d;
+}
+
+.gridContainer {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(3, 1fr); // default fallback
+  width: 100%;
+}
+
+.gridItem {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.checkbox {
+  font-size: 13px;
+  color: #8492c5;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  word-break: break-word;
+}
+
+.error {
+  color: #ff4d4f;
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+/* ✅ Tablet (≤1024px): 2 columns */
+@media (max-width: 1024px) {
+  .gridContainer {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+
+/* ✅ Mobile (≤768px): 1 column */
+@media (max-width: 768px) {
+  .gridContainer {
+    grid-template-columns: 1fr !important;
+  }
+}

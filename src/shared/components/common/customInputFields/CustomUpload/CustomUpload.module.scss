@@ -1,0 +1,29 @@
+.uploadContainer {
+  margin-top: 12px;
+  padding: 16px;
+  border: 1px dashed #ccc;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.dragger {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.uploadContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon {
+  font-size: 24px;
+  color: #aaa;
+}
+
+.browseButton {
+  margin-top: 8px;
+}

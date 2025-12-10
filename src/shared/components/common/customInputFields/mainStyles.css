@@ -1,0 +1,132 @@
+.custom-input-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+.custom-input {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #6273a270 !important;
+  /* border: 1px solid #eee !important; */
+  font-family: "robotoFlex", sans-serif !important;
+  border-radius: 4px !important;
+  outline: 0 !important;
+  transition: border-color 0.3s ease-in-out;
+  resize: none;
+}
+
+.custom-pwd-input {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  /* flex-direction: column; */
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #6273a270 !important;
+  /* border: 1px solid #eee !important; */
+  font-family: "robotoFlex", sans-serif !important;
+  border-radius: 4px !important;
+  outline: 0 !important;
+  transition: border-color 0.3s ease-in-out;
+}
+
+/* Medium Input */
+.md {
+  height: 40px !important;
+  font-size: 16px !important;
+  border: 1.2px solid #eee !important;
+}
+
+/* Extra Large Input */
+.xl {
+  height: 50px !important;
+  font-size: 17px !important;
+  border: 2px solid #eee !important;
+}
+
+/* Small Input */
+.sm {
+  height: 32px !important;
+  font-size: 13px !important;
+  padding: 6px !important;
+}
+
+/* Focus Effect */
+.custom-input::placeholder {
+  color: #6273a2 !important;
+  font-size: 13px;
+}
+
+/* .custom-input:focus {
+  border: 1px solid var(--secondary) !important;
+  box-shadow: 0 0 5px rgba(0, 90, 158, 0.5);
+} */
+
+/* Medium Focus */
+.md.custom-input:focus {
+  border: 1.5px solid var(--secondary) !important;
+  box-shadow: 0 0 6px rgba(0, 90, 158, 0.5);
+}
+
+/* Extra Large Focus */
+.xl.custom-input:focus {
+  border: 2px solid var(--secondary) !important;
+  box-shadow: 0 0 8px rgba(0, 90, 158, 0.5);
+}
+
+/* Small Focus */
+.sm.custom-input:focus {
+  border: 1px solid var(--secondary) !important;
+  box-shadow: 0 0 4px rgba(0, 90, 158, 0.5);
+}
+
+/* Error State */
+.input-error {
+  border: 1px solid #ff4d4f !important;
+  /* box-shadow: 0 0 5px rgba(211, 47, 47, 0.5); */
+}
+
+.error-message {
+  color: #ff4d4f;
+  font-size: 13px;
+  font-family: "robotoFlex", sans-serif !important;
+}
+
+.custom-select-container .ant-select {
+  width: 100%;
+}
+
+.readOnlyValue {
+  /* padding: 8px 12px; */
+  /* border: 1px solid #d9d9d9; */
+  /* border-radius: 6px; */
+  /* min-height: 38px; */
+  /* line-height: 1.5; */
+  /* background-color: #fafafa; */
+  width: 100%;
+  color: #303e67;
+  font-family: "robotoFlex", sans-serif !important;
+}
+
+.radioLabel {
+  font-family: "robotoFlex", sans-serif !important;
+  font-size: 13px;
+  color: #303e67;
+}
+
+.signature-canvas {
+  width: 100% !important;
+  height: 100% !important;
+  touch-action: none;
+  display: block;
+  border-radius: 6px;
+}

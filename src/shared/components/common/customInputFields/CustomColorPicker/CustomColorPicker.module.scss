@@ -1,0 +1,26 @@
+.colorPickerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #bac2d6;
+  border-radius: 8px;
+  padding: 4px 15px;
+  width: 100%;
+  font-family: "robotoFlex", sans-serif;
+  border-radius: 3px;
+}
+
+.colorPickerLabel {
+  color: #1e293b;
+  font-weight: 500;
+}
+
+.colorPickerInput {
+  width: 46px;
+  height: 24px;
+  border: none !important;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  border-radius: 50% !important;
+}

@@ -1,0 +1,94 @@
+.inputMainWrapper {
+  position: relative;
+  min-height: 32px;
+  height: auto;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 3px;
+}
+
+.pickerWrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 5px;
+  > div {
+    border: 1px solid #6273a270;
+    border-radius: 4px;
+  }
+  &.errorWrapper {
+    > div {
+      border: 1px solid var(--critical);
+    }
+  }
+  input {
+    &::after {
+      display: none !important;
+    }
+  }
+}
+
+.disabledInput {
+  opacity: 0.9 !important;
+  > div {
+    border: 1px solid #eee !important;
+    border-radius: 4px;
+  }
+}
+
+.inputLabel {
+  position: absolute;
+  top: 25%;
+  left: 6px;
+  transform: translateY(-50%);
+  font-size: 16px;
+  transition: 0.3s ease;
+  pointer-events: none;
+  color: #adadad;
+}
+
+.inputLabel.active {
+  top: -8px;
+  font-size: 12px;
+  color: #adadad;
+}
+
+.mandatoryField {
+  color: var(--critical);
+}
+
+.errorMsg {
+  margin-top: 2px;
+  height: 19px;
+  // margin-bottom: 16px;
+  color: var(--critical);
+  // font-family: "osMedium", sans-serif;
+  font-family: "robotoFlex", sans-serif !important;
+  font-size: 13px;
+  text-align: left;
+  // margin-left: -8px;
+  // text-transform: lowercase;
+  animation: slideAndFade 0.17s both ease !important;
+}
+
+.errorInput {
+  border: 1px solid var(--critical) !important;
+}
+
+@keyframes slideAndFade {
+  0% {
+    opacity: 0;
+    margin-top: -10px;
+    /* Start off-screen */
+  }
+  100% {
+    opacity: 1;
+    margin-top: 2px;
+    /* Slide down */
+  }
+}

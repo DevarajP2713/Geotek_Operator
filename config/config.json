@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "geotek-operator-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/geotekOperator/GeotekOperatorWebPart.js",
+          "manifest": "./src/webparts/geotekOperator/GeotekOperatorWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "GeotekOperatorWebPartStrings": "lib/webparts/geotekOperator/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
+  }
+}

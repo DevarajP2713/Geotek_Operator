@@ -1,0 +1,21 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
+    "isCreatingSolution": true,
+    "nodeVersion": "18.18.1",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.12.0"
+    },
+    "version": "1.18.2",
+    "libraryName": "geotek-operator",
+    "libraryId": "6a5b2d54-a97b-4adc-8dd5-92f27bfbf047",
+    "environment": "spo",
+    "packageManager": "npm",
+    "solutionName": "GeotekOperator",
+    "solutionShortDescription": "GeotekOperator description",
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "componentType": "webpart"
+  }
+}
