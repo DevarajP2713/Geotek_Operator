@@ -1,3 +1,83 @@
 .con {
     width: 100%;
+
+    .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #b8b8b8;
+
+        .headerLeftBox {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+
+            .title {
+                margin: 0;
+                font-size: 18px;
+                font-weight: 600;
+            }
+        }
+
+        .homeBtn {
+            background-color: #FF5E14;
+            color: #fff;
+        }
+    }
+
+    .body {
+        width: 100%;
+
+        .detailsBox {
+            width: 100%;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 20px;
+
+            .details {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex-wrap: wrap;
+                gap: 4px;
+
+                label {
+                    width: 100%;
+                    font-size: 14px;
+                    font-weight: 500;
+                    color: #828282;
+                }
+
+                .content {
+                    margin: 0;
+                    font-size: 18px;
+                    font-weight: 500;
+                    color: #00235a;
+
+                }
+            }
+        }
+
+        .imgBox {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 50px;
+            margin: 50px 0;
+
+            img {
+                width: 230px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
 }
