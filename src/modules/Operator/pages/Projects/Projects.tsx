@@ -6,12 +6,12 @@ import React, { useEffect, useState } from "react";
 import CustomTextInput from "../../../../shared/components/common/customInputFields/CustomTextInput/CustomTextInput";
 import { useNavigate } from "react-router-dom";
 import useProjects from "../../hooks/useProjects";
-import { IOperatorSearchObject, IProjectsObject } from "../../entities/types";
+import { ISearchObject, IProjectsObject } from "../../entities/types";
 import { projectsConstants } from "../../entities/constants";
 import styles from "./Projects.module.scss";
 
 /* Global varaiable creation start */
-let localSearchData: IOperatorSearchObject =
+let localSearchData: ISearchObject =
   projectsConstants.ProjectSearchData;
 
 const Projects = (): JSX.Element => {
@@ -21,7 +21,7 @@ const Projects = (): JSX.Element => {
 
   // States
   const [masprojectsData, setMasprojectsData] = useState<IProjectsObject[]>([]);
-  const [searchData, setSearchData] = useState<IOperatorSearchObject>({
+  const [searchData, setSearchData] = useState<ISearchObject>({
     ...projectsConstants.ProjectSearchData,
   });
 
@@ -54,12 +54,12 @@ const Projects = (): JSX.Element => {
         <h1 className={styles.title}>Choose a Project</h1>
         <div className="filterInp">
           <CustomTextInput
-            placeholder="Search"
+            placeholder="Search Project"
             disabled={requestStatus?.dataFetching}
             value={searchData.Search}
             onChange={(e: any) => {
               localSearchData.Search = e.target.value;
-              setSearchData((prev: IOperatorSearchObject) => ({
+              setSearchData((prev: ISearchObject) => ({
                 ...prev,
                 Search: e.target.value,
               }));
@@ -80,7 +80,7 @@ const Projects = (): JSX.Element => {
                   className={styles.projectBox}
                   title={value?.Title ?? ""}
                   onClick={() => {
-                    navigate(`/projects/${value?.ID}`);
+                    navigate(`/projects/${value?.ID}/shift`);
                   }}
                 >
                   <h2 className={styles.projectValue}>{value?.Title ?? ""}</h2>

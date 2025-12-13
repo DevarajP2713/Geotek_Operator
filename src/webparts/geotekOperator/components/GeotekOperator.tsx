@@ -11,6 +11,12 @@ import ErrorElement from "../../../shared/components/common/ErrorElement/ErrorEl
 // import { routes } from "../../../routes/routes";
 import Header from "../../../shared/components/common/Header/Header";
 import ShiftDetails from "../../../modules/Operator/pages/ShiftCalendar/ShiftDetails";
+import Projects from "../../../modules/Operator/pages/Projects/Projects";
+import Techniques from "../../../modules/Operator/pages/Techniques/Techniques";
+import WorkType from "../../../modules/Operator/pages/WorkType/WorkType";
+import PredrillingForm from "../../../modules/Operator/components/PredrillingForm/PredrillingForm";
+import ProductionForm from "../../../modules/Operator/components/ProductionForm/ProductionForm";
+import Preview from "../../../modules/Operator/pages/Preview/Preview";
 
 const GeotekOperator: React.FC<{ context: any }> = ({ context }) => {
   return (
@@ -44,8 +50,36 @@ const GeotekOperator: React.FC<{ context: any }> = ({ context }) => {
             >
               <Routes>
                 {/* {renderNestedRoutes(routes)} */}
-                <Route path="/shift" element={<ShiftDetails />} />
-
+                <Route path="/" element={<Projects />} />
+                <Route path="/projects" element={<Projects />} />
+                <Route
+                  path="/projects/:project_id/shift"
+                  element={<ShiftDetails />}
+                />
+                <Route
+                  path="/projects/:project_id/shift/:shift_id/:shift_type/techniques"
+                  element={<Techniques />}
+                />
+                <Route
+                  path="/projects/:project_id/shift/:shift_id/:shift_type/techniques/:technique_id"
+                  element={<WorkType />}
+                />
+                <Route
+                  path="/projects/:project_id/shift/:shift_id/:shift_type/techniques/:technique_id/add_drilling"
+                  element={<PredrillingForm />}
+                />
+                <Route
+                  path="/projects/:project_id/shift/:shift_id/:shift_type/techniques/:technique_id/add_production"
+                  element={<ProductionForm />}
+                />
+                <Route
+                  path="/projects/:project_id/shift/:shift_id/:shift_type/techniques/:technique_id/add_drilling/preview"
+                  element={<Preview />}
+                />
+                <Route
+                  path="/projects/:project_id/shift/:shift_id/:shift_type/techniques/:technique_id/add_production/preview"
+                  element={<Preview />}
+                />
                 <Route
                   path="*"
                   element={

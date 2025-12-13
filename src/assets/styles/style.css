@@ -1387,3 +1387,39 @@ button.actionBtnV2--danger .anticon {
 .fc .fc-daygrid-day.fc-day-today {
     background: linear-gradient(90deg, #00235A, #FF5E14) !important;
 }
+
+.fc .fc-view-harness {
+    height: 490px !important;
+}
+
+.fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.fc-h-event {
+    background-color: transparent;
+    border: 1px solid transparent;
+}
+
+/* .fc-h-event .fc-event-main */
+.shift-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+    border-radius: 4px;
+    width: 40px;
+    height: 35px;
+}
+
+.Day {
+    background: linear-gradient(180deg, #FFBF00, #FF5E14);
+}
+
+.Night {
+    background: linear-gradient(180deg, #00235A, #000000);
+}

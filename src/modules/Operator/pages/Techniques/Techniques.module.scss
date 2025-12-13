@@ -1,3 +1,71 @@
 .con {
     width: 100%;
+
+    .header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        border-bottom: 1px solid #b8b8b8;
+
+        .headerLeftBox {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 10px;
+
+            .title {
+                margin: 0;
+                font-size: 18px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    .body {
+        width: 100%;
+        height: calc(100vh - 165px);
+        overflow: auto;
+
+        .bodyCon {
+            width: 100%;
+            padding: 10px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+
+            .projectBox {
+                border: 1px solid #cdcdcd;
+                padding: 20px;
+                border-radius: 6px;
+                text-align: center;
+                background: #fff;
+                box-shadow: 1px 2px 4px 0px #808080;
+                cursor: pointer;
+
+                .projectValue {
+                    margin: 0;
+                    font-size: 18px;
+                    font-weight: 500;
+                    color: #000;
+                }
+            }
+        }
+    }
+
+    .noBody {
+        width: 100%;
+        height: calc(100vh - 165px);
+        overflow: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .noData {
+            font-size: 16px;
+            font-weight: 500;
+            color: #7d7d7d;
+        }
+    }
 }
