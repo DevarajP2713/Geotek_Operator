@@ -18,7 +18,8 @@
 
     .body {
         width: 100%;
-        height: calc(100vh - 165px);
+        // height: calc(100vh - 170px);
+        height: 473px;
         overflow: auto;
 
         .bodyCon {
@@ -37,11 +38,24 @@
                 box-shadow: 1px 2px 4px 0px #808080;
                 cursor: pointer;
 
-                .projectValue {
+                .projectNumber {
+                    margin: 0;
+                    font-size: 16px;
+                    font-weight: 500;
+                    color: #000;
+                }
+
+                .projectName {
                     margin: 0;
                     font-size: 18px;
                     font-weight: 500;
-                    color: #000;
+                    color: #00235a;
+
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    /* number of lines */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
                 }
             }
         }
@@ -49,7 +63,7 @@
 
     .noBody {
         width: 100%;
-        height: calc(100vh - 165px);
+        height: 473px;
         overflow: auto;
         display: flex;
         justify-content: center;

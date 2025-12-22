@@ -4,7 +4,7 @@ import { constants } from "../../../config/constants";
 import { IDropValue } from "../../../types/Types";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-export const AddPredrillingData = async (formData: any): Promise<string> => {
+export const AddProductionData = async (formData: any): Promise<string> => {
   try {
     const toLocalISO = (timeString: string): string => {
       if (!timeString) return "";
@@ -20,8 +20,14 @@ export const AddPredrillingData = async (formData: any): Promise<string> => {
     };
 
     const data = {
-      Predrilling: true,
-      Number: formData?.selectPoints?.toString() || "",
+      //   Predrilling: true,
+      PredrillingDetailsId: formData?.selectPointPredrilling?.value
+        ? formData?.selectPointPredrilling?.value
+        : null,
+      Number: formData?.selectPointPredrilling?.value
+        ? formData?.selectPointPredrilling?.label?.toString()
+        : formData?.selectPoints?.toString() || "",
+
       ProjectId: formData?.MasterData?.ProjectName?.value || null,
       TechniqueId: formData?.MasterData?.Technique?.value || null,
       EquipmentsId: {
@@ -30,17 +36,20 @@ export const AddPredrillingData = async (formData: any): Promise<string> => {
       ShiftDetailId: formData?.MasterData?.Shift?.value || null,
 
       // Final ISO DateTime without timezone shift
-      PredrillingStartTime: toLocalISO(formData?.startTime),
-      PredrillingEndTime: toLocalISO(formData?.stopTime),
+      ProductionStartTime: toLocalISO(formData?.startTime),
+      ProductionEndTime: toLocalISO(formData?.stopTime),
 
-      PredrillingDuration: formData?.duration || "0",
-      PredrillingDepth: formData?.depth?.toString() || "",
-      PredrillingDiameter: formData?.count?.toString() || "",
+      ProductionDuration: formData?.duration || "0",
+      ProductionDepth: formData?.depth?.toString() || "",
+      Count: formData?.count?.toString() || "",
+
+      TotalQuantity: formData?.calculateTotalQuantity.toString() || "",
+      AverageDiameter: formData?.calculateDiameter.toString() || "",
       IsDeleted: false,
     };
 
     await SpServices.SPAddItem({
-      Listname: constants.ListName.PM_PreDrillingData,
+      Listname: constants.ListName.PM_ProductionData,
       RequestJSON: data,
     });
 
@@ -66,9 +75,9 @@ export const AddPredrillingData = async (formData: any): Promise<string> => {
       });
     }
 
-    return "Added Prdrilling data successfully";
+    return "Added Production data successfully";
   } catch (error) {
-    console.warn("Add predrilling data error", error);
-    return "Add Predrilling failed";
+    console.warn("Add production data error", error);
+    return "Add Production failed";
   }
 };

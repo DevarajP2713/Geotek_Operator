@@ -6,6 +6,8 @@ import { constants } from "../../../config/constants";
 import { ShiftQueries } from "../camlQuery/ShiftQueries";
 import { TechniqueQueries } from "../camlQuery/TechniqueQueries";
 import { PMPredrillingQueries } from "../camlQuery/PredrillingQueries";
+import SpServices from "../../../shared/Service/SPServices/SpServices";
+// import { PMProductionQueries } from "../camlQuery/ProductionQueries";
 
 export const fetchProject = async (ProjectID: number): Promise<any> => {
   try {
@@ -34,6 +36,32 @@ export const fetchShift = async (ShiftID: number): Promise<any> => {
   } catch (error) {
     console.error("Production shift fetch error:", error);
     return [];
+  }
+};
+
+export const FetchEquimpments = async (ProjectID: number): Promise<any> => {
+  try {
+    const res: any[] = await SpServices.SPReadItems({
+      Listname: constants.ListName.AllEquipments,
+      Select:
+        "*, EquipmentType/ID, EquipmentType/Name, Project/ID, Project/Name, Vendor/ID, Vendor/VendorName, Author/Title, Author/EMail, Author/ID, AssignedTo/Title, AssignedTo/EMail, AssignedTo/ID",
+      Expand: "EquipmentType, Project, Vendor, Author, AssignedTo",
+      Filter: [
+        {
+          FilterKey: "ProjectId",
+          Operator: "eq",
+          FilterValue: ProjectID,
+        },
+      ],
+      Topcount: 5000,
+      Orderby: "Created",
+      Orderbydecorasc: false,
+    });
+
+    return res;
+  } catch (err) {
+    console.error("Error fetching Equimpments:", err);
+    return null;
   }
 };
 
@@ -74,3 +102,26 @@ export const fetchPredrilling = async (
     return [];
   }
 };
+
+// export const fetchProduction = async (
+//   ProjectID: number,
+//   ShiftID: number,
+//   TechniqueID: number
+// ): Promise<any> => {
+//   try {
+//     const query = PMProductionQueries.getCamlQuery(
+//       ProjectID,
+//       ShiftID,
+//       TechniqueID
+//     );
+//     const items = await fetchPagedListData({
+//       ListName: constants.ListName.PM_ProductionData,
+//       CamlQuery: query[0].CamlQuery,
+//     });
+
+//     return items;
+//   } catch (error) {
+//     console.error("Production fetch error:", error);
+//     return [];
+//   }
+// };

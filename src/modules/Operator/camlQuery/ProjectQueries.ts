@@ -3,14 +3,21 @@ import { constants } from "../../../config/constants";
 import { ICamlQuery } from "../../../types/Types";
 
 export namespace camlQuery {
-  export const Projects: ICamlQuery = {
-    ListName: constants.ListName.PM_Projects,
-    CamlQuery: `
+  export const Projects = (): ICamlQuery[] => [
+    {
+      ListName: constants.ListName.PM_Projects,
+      CamlQuery: `
         <View Scope='RecursiveAll'>
           <Query>
             <OrderBy>
               <FieldRef Name='Created' Ascending='FALSE'/>
             </OrderBy>
+            <Where>
+              <Eq>
+                <FieldRef Name='Status' />
+                <Value Type='Text'>Work in Progress</Value>
+              </Eq>
+          </Where>
           </Query>
           <ViewFields>
             <FieldRef Name='Title' />
@@ -88,7 +95,8 @@ export namespace camlQuery {
           </ViewFields>
           <RowLimit Paged='TRUE'>5000</RowLimit>
         </View>`,
-  };
+    },
+  ];
 
   export const getProjectCamlQuery = (projectId: number): ICamlQuery[] => [
     {
