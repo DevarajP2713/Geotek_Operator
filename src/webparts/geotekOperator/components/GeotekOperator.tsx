@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   // useState, useEffect,
   Suspense,
@@ -17,9 +17,19 @@ import WorkType from "../../../modules/Operator/pages/WorkType/WorkType";
 import PredrillingForm from "../../../modules/Operator/components/PredrillingForm/PredrillingForm";
 import ProductionForm from "../../../modules/Operator/components/ProductionForm/ProductionForm";
 import Preview from "../../../modules/Operator/pages/Preview/Preview";
+import ScreenSaver from "../../../modules/Operator/pages/ScreenSaver/ScreenSaver";
 
 const GeotekOperator: React.FC<{ context: any }> = ({ context }) => {
-  return (
+  const [isSplashScreen, setIsSplashScreen] = useState<boolean>(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsSplashScreen(false);
+    }, 2800);
+  }, []);
+  return isSplashScreen ? (
+    <ScreenSaver />
+  ) : (
     <HashRouter>
       <div
         style={{
@@ -29,7 +39,7 @@ const GeotekOperator: React.FC<{ context: any }> = ({ context }) => {
           marginRight: "auto",
           position: "relative",
           background: "#00235A",
-          borderRadius: "10px",
+          // borderRadius: "10px",
         }}
       >
         <Suspense fallback={<div>Loading...</div>}>

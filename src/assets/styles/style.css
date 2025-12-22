@@ -16,6 +16,10 @@
     padding: 0 !important;
 }
 
+.spAppAndPropertyPanelContainer {
+    padding: 0 !important;
+}
+
 .spAppAndPropertyPanelContainer .sp-appBar {
     display: none;
 }
@@ -1389,7 +1393,8 @@ button.actionBtnV2--danger .anticon {
 }
 
 .fc .fc-view-harness {
-    height: 490px !important;
+    /* height: 490px !important; */
+    height: 394.5px !important;
 }
 
 .fc .fc-daygrid-body-unbalanced .fc-daygrid-day-events {
@@ -1397,6 +1402,7 @@ button.actionBtnV2--danger .anticon {
     justify-content: center;
     align-items: center;
     gap: 5px;
+    margin-bottom: 5px;
 }
 
 .fc-h-event {

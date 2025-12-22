@@ -1,5 +1,5 @@
 .con {
-    padding: 20px;
+    width: 100%;
 
     .header {
         width: 100%;
@@ -29,9 +29,16 @@
     }
 
     .body {
-        margin-top: 20px;
+        height: 473px;
+        overflow: auto;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 20px;
 
         .formPageBox {
+            width: 100%;
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 30px;
@@ -67,6 +74,30 @@
                         width: 80px;
                     }
 
+                    .inputBtn {
+                        width: 80px;
+                        font-size: 16px;
+                        border-width: 0px;
+                        color: #b2b2b2;
+                        background-color: #00000000;
+                    }
+
+                    .inputNullBtn {
+                        width: 80px;
+                        font-size: 16px;
+                        border-width: 0px;
+                        color: #b2b2b2;
+                        background-color: #00000000;
+                    }
+
+                    .inputBtn:hover {
+                        color: #504e4e;
+                    }
+
+                    .prevNum {
+                        margin-bottom: 3px;
+                    }
+
                     .prevNum,
                     .nextNum {
                         opacity: 0.4;
@@ -87,7 +118,7 @@
                         border-radius: 8px;
 
                         /* hide spinners */
-                        -moz-appearance: textfield;
+                        // -moz-appearance: textfield;
                     }
 
                     .mainInput::-webkit-inner-spin-button,
@@ -133,10 +164,32 @@
                     cursor: pointer;
                 }
             }
+
+            .calculationBox {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                gap: 8px;
+
+                label {
+                    color: #757575;
+                    font-size: 14px !important;
+                    font-weight: 500;
+                    width: 120px;
+                }
+
+                h2 {
+                    margin: 0;
+                    font-size: 18px;
+                    font-weight: 500;
+                    color: #000;
+                }
+            }
         }
 
         .footerPageBox {
-            margin-top: 40px;
+            width: 100%;
+            margin-top: 24px;
             display: flex;
             justify-content: flex-end;
 

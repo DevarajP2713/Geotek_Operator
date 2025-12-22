@@ -25,7 +25,8 @@
 
     .body {
         width: 100%;
-        height: calc(100vh - 165px);
+        // height: calc(100vh - 165px);
+        height: 473px;
         overflow: auto;
 
         .bodyCon {
@@ -49,6 +50,12 @@
                     font-size: 18px;
                     font-weight: 500;
                     color: #000;
+
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    /* number of lines */
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
                 }
             }
         }
@@ -56,7 +63,7 @@
 
     .noBody {
         width: 100%;
-        height: calc(100vh - 165px);
+        height: 473px;
         overflow: auto;
         display: flex;
         justify-content: center;

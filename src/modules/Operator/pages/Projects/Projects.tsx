@@ -1,95 +1,97 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-disable prefer-const */
 /* eslint-disable @typescript-eslint/no-floating-promises */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import CustomTextInput from "../../../../shared/components/common/customInputFields/CustomTextInput/CustomTextInput";
 import { useNavigate } from "react-router-dom";
 import useProjects from "../../hooks/useProjects";
 import { ISearchObject, IProjectsObject } from "../../entities/types";
 import { projectsConstants } from "../../entities/constants";
 import styles from "./Projects.module.scss";
-
-/* Global varaiable creation start */
-let localSearchData: ISearchObject =
-  projectsConstants.ProjectSearchData;
+import { Skeleton } from "antd";
+import { handleMessages } from "../../../../shared/utils/UserManagementUtils";
 
 const Projects = (): JSX.Element => {
-  /* local varaiables creation start */
   const navigate = useNavigate();
   const { masterData, requestStatus, refetch } = useProjects();
 
-  // States
-  const [masprojectsData, setMasprojectsData] = useState<IProjectsObject[]>([]);
   const [searchData, setSearchData] = useState<ISearchObject>({
     ...projectsConstants.ProjectSearchData,
   });
 
-  const handleSearch = async (): Promise<void> => {
-    let _filterData: IProjectsObject[] = [...masterData];
-
-    if (localSearchData.Search) {
-      _filterData =
-        _filterData?.filter((val: IProjectsObject) =>
-          val?.Title?.toLocaleLowerCase()?.includes(
-            localSearchData?.Search?.toLocaleLowerCase()
-          )
-        ) || [];
-    }
-
-    setMasprojectsData([..._filterData]);
-  };
-
   useEffect(() => {
     refetch();
-  }, []);
+  }, [refetch]);
 
   useEffect(() => {
-    setMasprojectsData(masterData);
+    handleMessages(requestStatus);
   }, [requestStatus]);
+
+  const filteredProjects = useMemo<IProjectsObject[]>(() => {
+    if (!searchData.Search) return masterData;
+
+    const searchText = searchData.Search.toLowerCase();
+
+    return masterData.filter(
+      (project) =>
+        project?.Title?.toLowerCase().includes(searchText) ||
+        project?.Name?.toLowerCase().includes(searchText)
+    );
+  }, [masterData, searchData.Search]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearchData({ Search: e.target.value });
+  };
+
+  const handleProjectClick = (id: number): void => {
+    if (!id) return;
+    navigate(`/projects/${id}/shift`);
+  };
 
   return (
     <div className={styles.operatorCon}>
       <div className={styles.header}>
         <h1 className={styles.title}>Choose a Project</h1>
+
         <div className="filterInp">
           <CustomTextInput
             placeholder="Search Project"
             disabled={requestStatus?.dataFetching}
             value={searchData.Search}
-            onChange={(e: any) => {
-              localSearchData.Search = e.target.value;
-              setSearchData((prev: ISearchObject) => ({
-                ...prev,
-                Search: e.target.value,
-              }));
-              handleSearch();
-            }}
+            onChange={handleSearchChange}
           />
         </div>
       </div>
-      <div
-        className={`${masprojectsData?.length ? styles.body : styles.noBody}`}
-      >
-        {masprojectsData?.length ? (
+
+      <div className={filteredProjects.length ? styles.body : styles.noBody}>
+        {requestStatus?.dataFetching ? (
           <div className={styles.bodyCon}>
-            {masprojectsData?.map((value: IProjectsObject, index: number) => {
-              return (
-                <div
-                  key={index}
-                  className={styles.projectBox}
-                  title={value?.Title ?? ""}
-                  onClick={() => {
-                    navigate(`/projects/${value?.ID}/shift`);
-                  }}
+            {Array.from({ length: 6 }).map((_, index) => (
+              <div key={index} className={styles.projectBox}>
+                <Skeleton active title={{ width: "80%" }} paragraph={false} />
+              </div>
+            ))}
+          </div>
+        ) : filteredProjects.length ? (
+          <div className={styles.bodyCon}>
+            {filteredProjects.map((project) => (
+              <div
+                key={project.ID}
+                className={styles.projectBox}
+                onClick={() => handleProjectClick(Number(project.ID))}
+              >
+                <h2
+                  className={styles.projectNumber}
+                  title={project.Title ?? ""}
                 >
-                  <h2 className={styles.projectValue}>{value?.Title ?? ""}</h2>
-                </div>
-              );
-            })}
+                  {project.Title ?? ""}
+                </h2>
+                <h2 className={styles.projectName} title={project.Name ?? ""}>
+                  {project.Name ?? ""}
+                </h2>
+              </div>
+            ))}
           </div>
         ) : (
-          <p className={styles.noData}>No Projects</p>
+          <p className={styles.noData}>No Project</p>
         )}
       </div>
     </div>

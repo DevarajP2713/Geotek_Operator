@@ -5,6 +5,7 @@ import { IDropValue, ILoaderStatus } from "../../../types/Types";
 import { constants } from "../../../config/constants";
 // import { fetchProjects } from "../services/projectsService";
 import {
+  // FetchEquimpments,
   fetchPredrilling,
   fetchProject,
   fetchShift,
@@ -16,6 +17,7 @@ import { sp } from "@pnp/sp/presets/all";
 const useWorkType = (): {
   masterData: IWorkTypeDetailsObject;
   equipmentChoices: IDropValue[];
+  calibrationValue: string;
   requestStatus: ILoaderStatus;
   refetch: (
     projectID: number,
@@ -29,7 +31,7 @@ const useWorkType = (): {
   );
   const [masterData, setMasterData] = useState<IWorkTypeDetailsObject>(Object);
   const [equipmentChoices, setEquipmentChoices] = useState<IDropValue[]>([]);
-  //   const [mainData, setMainData] = useState();
+  const [calibrationValue, setCalibrationValue] = useState<string>("");
 
   const updateStatus = (overrides: Partial<ILoaderStatus>): void => {
     setRequestStatus((prev) => ({ ...prev, ...overrides }));
@@ -50,11 +52,6 @@ const useWorkType = (): {
           fetchTechnique(TechniqueID),
           fetchPredrilling(projectID, ShiftID, TechniqueID),
         ]);
-
-      console.log("projectID", projectID);
-      console.log("ShiftID", ShiftID);
-      console.log("TechniqueID", TechniqueID);
-      console.log("arrPredrilling", arrPredrilling);
 
       setMasterData({
         ID: null,
@@ -80,7 +77,9 @@ const useWorkType = (): {
             }
           : null,
         Predrilling: arrTechnique?.length
-          ? arrTechnique[0]?.Predrilling
+          ? arrTechnique[0]?.Predrilling === "No"
+            ? false
+            : true
           : false,
         PredrillingNumber: arrPredrilling?.length
           ? arrPredrilling?.map((e: any) => ({
@@ -96,7 +95,7 @@ const useWorkType = (): {
           requestProcessing: false,
           isLoading: false,
           promiseResolved: true,
-          message: "All projects type successfully fetched.",
+          message: "Work type successfully fetched.",
         });
       } else {
         updateStatus({
@@ -104,7 +103,7 @@ const useWorkType = (): {
           isLoading: false,
           errorCode: arrProject?.code || "FETCH_ERROR",
           errorName: arrProject?.name || "FetchError",
-          message: arrProject?.message || "Failed to fetch project type.",
+          message: arrProject?.message || "Failed to fetch work type.",
         });
       }
     },
@@ -112,7 +111,11 @@ const useWorkType = (): {
   );
 
   const fetchTechniques = useCallback(
-    async (projectID: number, TechniqueId: number): Promise<void> => {
+    async (
+      projectID: number,
+      // shiftId: number,
+      TechniqueId: number
+    ): Promise<void> => {
       updateStatus({
         dataFetching: true,
         isLoading: true,
@@ -129,10 +132,24 @@ const useWorkType = (): {
             TechniqueId
           );
 
-        const response = await list.renderListDataAsStream({
-          ViewXml: camlQueryPayload.CamlQuery,
-        });
+        const [
+          response,
+          // , equipments
+        ] = await Promise.all([
+          list.renderListDataAsStream({
+            ViewXml: camlQueryPayload.CamlQuery,
+          }),
+          // fetchPredrilling(projectID, shiftId, TechniqueId),
+          // fetchProduction(projectID, shiftId, TechniqueId),
+          // FetchEquimpments(projectID),
+        ]);
         const rows = response?.Row ?? [];
+
+        // const equipmentMapped: IDropValue[] = equipments?.map((item: any) => ({
+        //   value: item?.ID,
+        //   label: item?.EquipmentID,
+        //   isActive: false,
+        // }));
 
         const mapped: IDropValue[] = rows[0]?.Equipments?.map((item: any) => ({
           value: item?.lookupId,
@@ -140,8 +157,16 @@ const useWorkType = (): {
           isActive: true,
         }));
 
-        console.log(mapped);
+        // const uniqueEquipments = Array.from(
+        //   new Map(
+        //     [
+        //       // ...equipmentMapped,
+        //       ...mapped.map((i) => ({ ...i, isActive: true })),
+        //     ].map((i) => [i.value, i])
+        //   ).values()
+        // );
 
+        setCalibrationValue(rows[0]?.CalibrationValue || "");
         setEquipmentChoices(mapped);
         updateStatus({
           dataFetching: false,
@@ -167,6 +192,7 @@ const useWorkType = (): {
   return {
     masterData,
     equipmentChoices,
+    calibrationValue,
     requestStatus,
     refetch,
     fetchTechniques,

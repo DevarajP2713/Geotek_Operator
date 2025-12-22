@@ -20,40 +20,41 @@ const useProjects = (): {
   };
 
   const refetch = useCallback(async () => {
-    updateStatus({
-      requestProcessing: true,
-      isLoading: true,
-      message: "Processing in progress. Please wait...",
-    });
+    try {
+      updateStatus({
+        requestProcessing: true,
+        isLoading: true,
+        message: "Processing in progress. Please wait...",
+      });
 
-    const [arrprojects] = await Promise.all([fetchProjects()]);
+      const arrprojects = await fetchProjects();
 
-    const prepareprojects: IProjectsObject[] =
-      arrprojects?.map((item: any) => {
-        return {
-          ID: item?.ID ? Number(item?.ID) : "",
+      const prepareprojects: IProjectsObject[] = arrprojects.map(
+        (item: any) => ({
+          ID: Number(item?.ID) || 0,
           Title: item?.Title ?? "",
           Name: item?.Name ?? "",
-        };
-      }) || [];
+        })
+      );
 
-    await Promise.all(prepareprojects);
-    setMasterData(prepareprojects);
-    if (arrprojects?.length || arrprojects?.length === 0) {
+      setMasterData(prepareprojects);
+
       updateStatus({
         dataFetching: false,
         requestProcessing: false,
         isLoading: false,
         promiseResolved: true,
-        message: "All projects type successfully fetched.",
+        message: "All projects successfully fetched.",
       });
-    } else {
+    } catch (error: any) {
       updateStatus({
         dataFetching: false,
+        requestProcessing: false,
         isLoading: false,
-        errorCode: arrprojects?.code || "FETCH_ERROR",
-        errorName: arrprojects?.name || "FetchError",
-        message: arrprojects?.message || "Failed to fetch project type.",
+        promiseResolved: false,
+        errorCode: error?.code || "FETCH_ERROR",
+        errorName: error?.name || "FetchError",
+        message: error?.message || "Failed to fetch projects.",
       });
     }
   }, []);

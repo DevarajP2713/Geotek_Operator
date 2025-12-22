@@ -30,31 +30,34 @@ const fetchDataLooping = async (
   }
 };
 
-export const fetchProjects = async (): Promise<any> => {
+export const fetchProjects = async (): Promise<any[]> => {
   const data: any[] = [];
 
   try {
-    await sp.web.lists
-      .getByTitle(camlQuery.Projects.ListName)
-      .renderListDataAsStream({
-        ViewXml: camlQuery.Projects.CamlQuery,
-      })
-      .then(async (res: any) => {
-        data.push(...res.Row);
+    const projectQuery = camlQuery.Projects()[0];
 
-        if (res?.NextHref) {
-          await fetchDataLooping(
-            data,
-            res?.NextHref,
-            camlQuery.Projects.CamlQuery,
-            camlQuery.Projects.ListName
-          );
-        }
+    const res: any = await sp.web.lists
+      .getByTitle(projectQuery.ListName)
+      .renderListDataAsStream({
+        ViewXml: projectQuery.CamlQuery,
       });
 
-    return [...data];
+    if (res?.Row?.length) {
+      data.push(...res.Row);
+    }
+
+    if (res?.NextHref) {
+      await fetchDataLooping(
+        data,
+        res.NextHref,
+        projectQuery.CamlQuery,
+        projectQuery.ListName
+      );
+    }
+
+    return data;
   } catch (err) {
-    console.log("Data fetching error for leads and projects: ", err);
-    return [...data];
+    console.error("Data fetching error for leads and projects:", err);
+    return data;
   }
 };

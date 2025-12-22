@@ -1,5 +1,4 @@
 import React from "react";
-import styles from "./ProductionForm.module.scss";
 import DynamicForm, { DynamicFormProps } from "../DynamicForm/DynamicForm";
 
 const ProductionForm = (): JSX.Element => {
@@ -8,17 +7,13 @@ const ProductionForm = (): JSX.Element => {
     NavigateTitle: "add_production",
     FormPageLabels: {
       InputPoint: "Select Input Points",
-      Timer: "Timer",
+      Timer: "Duration",
       Depth: "Depth (ft)",
       Diameter: "Count",
       Equipment: "Equipment",
     },
   };
-  return (
-    <div className={styles.con}>
-      <DynamicForm data={Data} />
-    </div>
-  );
+  return <DynamicForm data={Data} />;
 };
 
 export default ProductionForm;
