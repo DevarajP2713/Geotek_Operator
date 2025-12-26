@@ -2,6 +2,7 @@
 import SpServices from "../../../shared/Service/SPServices/SpServices";
 import { constants } from "../../../config/constants";
 import { IDropValue } from "../../../types/Types";
+import { ErrorLogs } from "../../../shared/utils/ErrorLogs";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const AddPredrillingData = async (formData: any): Promise<string> => {
@@ -66,9 +67,15 @@ export const AddPredrillingData = async (formData: any): Promise<string> => {
       });
     }
 
-    return "Added Prdrilling data successfully";
-  } catch (error) {
-    console.warn("Add predrilling data error", error);
+    return "Predrilling data has been added successfully.";
+  } catch (err) {
+    await ErrorLogs(
+      "usePredrilling (AddPredrillingData)",
+      err instanceof Error ? err.message : String(err),
+      `${constants.ListName.PM_PreDrillingData} Add Item`
+    );
+
+    console.warn("Add predrilling data error", err);
     return "Add Predrilling failed";
   }
 };

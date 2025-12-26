@@ -2,6 +2,7 @@
 import SpServices from "../../../shared/Service/SPServices/SpServices";
 import { constants } from "../../../config/constants";
 import { IDropValue } from "../../../types/Types";
+import { ErrorLogs } from "../../../shared/utils/ErrorLogs";
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export const AddProductionData = async (formData: any): Promise<string> => {
@@ -75,9 +76,15 @@ export const AddProductionData = async (formData: any): Promise<string> => {
       });
     }
 
-    return "Added Production data successfully";
-  } catch (error) {
-    console.warn("Add production data error", error);
+    return "Production data has been added successfully.";
+  } catch (err) {
+    await ErrorLogs(
+      "useProduction (AddProductionData)",
+      err instanceof Error ? err.message : String(err),
+      `${constants.ListName.PM_ProductionData} Add Item`
+    );
+
+    console.warn("Add production data error", err);
     return "Add Production failed";
   }
 };

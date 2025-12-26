@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { sp } from "@pnp/sp/presets/all";
 import { camlQuery } from "../camlQuery/ProjectQueries";
+import { ErrorLogs } from "../../../shared/utils/ErrorLogs";
 
 const fetchDataLooping = async (
   data: any[],
@@ -32,10 +33,9 @@ const fetchDataLooping = async (
 
 export const fetchProjects = async (): Promise<any[]> => {
   const data: any[] = [];
+  const projectQuery = camlQuery.Projects()[0];
 
   try {
-    const projectQuery = camlQuery.Projects()[0];
-
     const res: any = await sp.web.lists
       .getByTitle(projectQuery.ListName)
       .renderListDataAsStream({
@@ -57,6 +57,12 @@ export const fetchProjects = async (): Promise<any[]> => {
 
     return data;
   } catch (err) {
+    await ErrorLogs(
+      "projectsService (fetchProjects)",
+      err instanceof Error ? err.message : String(err),
+      `${projectQuery.ListName} Read Items`
+    );
+
     console.error("Data fetching error for leads and projects:", err);
     return data;
   }
