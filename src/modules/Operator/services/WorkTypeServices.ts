@@ -7,6 +7,7 @@ import { ShiftQueries } from "../camlQuery/ShiftQueries";
 import { TechniqueQueries } from "../camlQuery/TechniqueQueries";
 import { PMPredrillingQueries } from "../camlQuery/PredrillingQueries";
 import SpServices from "../../../shared/Service/SPServices/SpServices";
+import { ErrorLogs } from "../../../shared/utils/ErrorLogs";
 // import { PMProductionQueries } from "../camlQuery/ProductionQueries";
 
 export const fetchProject = async (ProjectID: number): Promise<any> => {
@@ -18,8 +19,14 @@ export const fetchProject = async (ProjectID: number): Promise<any> => {
     });
 
     return items;
-  } catch (error) {
-    console.error("Project fetch error:", error);
+  } catch (err) {
+    await ErrorLogs(
+      "WorkTypeServices (fetchProject)",
+      err instanceof Error ? err.message : String(err),
+      `${constants.ListName.PM_Projects} Read Items`
+    );
+
+    console.error("Project fetch error:", err);
     return [];
   }
 };
@@ -33,8 +40,14 @@ export const fetchShift = async (ShiftID: number): Promise<any> => {
     });
 
     return items;
-  } catch (error) {
-    console.error("Production shift fetch error:", error);
+  } catch (err) {
+    await ErrorLogs(
+      "WorkTypeServices (fetchShift)",
+      err instanceof Error ? err.message : String(err),
+      `${constants.ListName.PM_Production_Shift} Read Items`
+    );
+
+    console.error("Production shift fetch error:", err);
     return [];
   }
 };
@@ -60,6 +73,12 @@ export const FetchEquimpments = async (ProjectID: number): Promise<any> => {
 
     return res;
   } catch (err) {
+    await ErrorLogs(
+      "WorkTypeServices (FetchEquimpments)",
+      err instanceof Error ? err.message : String(err),
+      `${constants.ListName.AllEquipments} Read Items`
+    );
+
     console.error("Error fetching Equimpments:", err);
     return null;
   }
@@ -74,8 +93,14 @@ export const fetchTechnique = async (TechniqueID: number): Promise<any> => {
     });
 
     return items;
-  } catch (error) {
-    console.error("Technique fetch error:", error);
+  } catch (err) {
+    await ErrorLogs(
+      "WorkTypeServices (fetchTechnique)",
+      err instanceof Error ? err.message : String(err),
+      `${constants.ListName.PM_Techniques} Read Items`
+    );
+
+    console.error("Technique fetch error:", err);
     return [];
   }
 };
@@ -97,8 +122,14 @@ export const fetchPredrilling = async (
     });
 
     return items;
-  } catch (error) {
-    console.error("Predrilling fetch error:", error);
+  } catch (err) {
+    await ErrorLogs(
+      "WorkTypeServices (fetchPredrilling)",
+      err instanceof Error ? err.message : String(err),
+      `${constants.ListName.PM_PreDrillingData} Read Items`
+    );
+
+    console.error("Predrilling fetch error:", err);
     return [];
   }
 };

@@ -64,6 +64,7 @@ export interface IListName {
   Set_Category: string;
   Set_MaintenanceType: string;
   Set_Region: string;
+  Error_Logs: string;
 }
 
 export interface OperatorRoutesProps {

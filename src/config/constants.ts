@@ -61,6 +61,7 @@ export namespace constants {
     Set_Category: "Set_Category",
     Set_MaintenanceType: "Set_MaintenanceType",
     Set_Region: "Set_Region",
+    Error_Logs: "Error_Logs",
 
     // projects
     PM_LeadsAndOpportunities: "PM_LeadsAndOpportunities",

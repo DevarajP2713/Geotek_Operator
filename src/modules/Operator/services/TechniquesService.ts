@@ -2,6 +2,7 @@
 import { sp } from "@pnp/sp/presets/all";
 import { TechniqueQueries } from "../camlQuery/TechniqueQueries";
 import { constants } from "../../../config/constants";
+import { ErrorLogs } from "../../../shared/utils/ErrorLogs";
 
 export const fetchTechniques = async (projectID: number): Promise<any> => {
   try {
@@ -20,8 +21,14 @@ export const fetchTechniques = async (projectID: number): Promise<any> => {
     }));
 
     return mapped;
-  } catch (error) {
-    console.error("Technique fetch error:", error);
+  } catch (err) {
+    await ErrorLogs(
+      "TechniquesService (fetchTechniques)",
+      err instanceof Error ? err.message : String(err),
+      `${constants.ListName.PM_Techniques} Read Items`
+    );
+
+    console.error("Technique fetch error:", err);
     return [];
   }
 };

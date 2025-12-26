@@ -13,6 +13,7 @@ import {
 } from "../services/WorkTypeServices";
 import { TechniqueQueries } from "../camlQuery/TechniqueQueries";
 import { sp } from "@pnp/sp/presets/all";
+import { ErrorLogs } from "../../../shared/utils/ErrorLogs";
 
 const useWorkType = (): {
   masterData: IWorkTypeDetailsObject;
@@ -174,14 +175,18 @@ const useWorkType = (): {
           message: "Techniques fetched",
           promiseResolved: true,
         });
-      } catch (error) {
+      } catch (err) {
+        await ErrorLogs(
+          "useWorkType (fetchTechniques)",
+          err instanceof Error ? err.message : String(err),
+          `${constants.ListName.PM_Techniques} Read Items`
+        );
+
         updateStatus({
           dataFetching: false,
           isLoading: false,
           requestProcessing: false,
-          message: `Error: ${
-            error instanceof Error ? error.message : String(error)
-          }`,
+          message: `Error: ${err instanceof Error ? err.message : String(err)}`,
           promiseResolved: false,
         });
       }
